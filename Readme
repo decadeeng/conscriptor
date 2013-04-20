@@ -1,0 +1,46 @@
+Since there are many ways to build conscriptor consider these guidelines as a pointer to what I did
+and what did work.
+
+Windows
+	This is the messiest build. Every version of qt and mingw has it's own dll's
+	You may need to use trial and error to have the complete set in nsis, then tweek
+	conscriptor.nsi
+	I used a samba share, F:, for my building.
+	This let me use linux tools eg git to setup everything. EG in linux environment I ran
+	./version.sh to set git and release numbers,
+	Under Windows, in a command window set up by Qt run qmake then make
+	After that run nsis on conscriptor.nsi to build the Setup.exe installer.
+	Conscriptor does not touch the registry so to uninstall browse to
+	C:\Program Files\conscriptor and run uninstall
+
+RPM
+	You will need dev tools, git, rpm-build and Qt tools and libs.
+	Most systems now use ~/rpmbuild. If you use /src/[redhat|system|other] you will need to
+	change the .pro, Makefile and spec files.
+	make -f Makefile.rpm
+
+DEB
+	You will need build-essential git and the Qt tools and libs
+	make -f Makefile.deb will reward you with a conscriptor-version.deb
+	you can install that with dpkg -i conscriptor-version.deb
+
+other
+	You will need C++ dev environment, Qt tools and libs and git.
+	./version.sh		# sets version and release numers
+	qmake			# creates Makefile
+	make			# runs the makefile
+	the executable is in conscriptor.
+
+Mac
+	Install Qt from MacPorts. This implies you will have xcode installed. Install GIT as
+	git-core from macports.
+	In top level conscriptor directory start the process with
+
+	 qmake
+	 make
+
+	You will be rewarded with conscriptor.app that you may use as a launcher.
+	The serial port options for Mac include /dev/ttys000 only.
+	You may edit the config settings to change this to ant value.
+
+As a convenience I placed tools here: http://tigger.ws/downloads
