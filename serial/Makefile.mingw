@@ -1,0 +1,22 @@
+#========================================================================#
+# TITLE:	qextserialport
+# MODULE:	Makefile
+# AUTHOR:	Ross C Linder	[Mecalc Pty Ltd]
+#
+#========================================================================#
+
+.SUFFIXES: .pro .mgk
+
+.pro.mgk:
+	@echo "Parsing project file" $<
+	qmake -o $@ $<
+
+
+staticlib:	qextserialport.mgk
+		mingw32-make -f qextserialport.mgk
+	
+all:		qextserialport.mgk
+		mingw32-make -f qextserialport.mgk
+
+clean:		qextserialport.mgk
+		mingw32-make -f qextserialport.mgk clean

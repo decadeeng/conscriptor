@@ -1,0 +1,34 @@
+NAME = conscriptor
+VERSION = 1.0
+RELEASE = "$(shell git log |grep commit |wc -l)"
+
+all:
+	mkdir -p $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN
+	mkdir -p $(NAME)-$(VERSION)-$(RELEASE)/usr/bin
+	mkdir -p $(NAME)-$(VERSION)-$(RELEASE)/usr/share/conscriptor/BDF_files
+	mkdir -p $(NAME)-$(VERSION)-$(RELEASE)/usr/share/conscriptor/BOB-4_Font_Files
+	cp -a doc $(NAME)-$(VERSION)-$(RELEASE)/usr/share/conscriptor/doc
+	cp -a 'BDF files' $(NAME)-$(VERSION)-$(RELEASE)/usr/share/conscriptor/BDF_files
+	cp -a 'BOB-4 Font Files' $(NAME)-$(VERSION)-$(RELEASE)/usr/share/conscriptor/BOB-4_Font_Files
+	
+	qmake conscriptor.pro
+	make -f Makefile clean
+	./version.sh
+	make -f Makefile
+	
+	cp conscriptor/conscriptor $(NAME)-$(VERSION)-$(RELEASE)/usr/bin
+	
+	echo "Package: $(NAME)" > $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Version: $(VERSION)-$(RELEASE)" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Section: base" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Priority: optional" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Architecture: all" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Depends: libqtgui4, libc6" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Maintainer: James <jam@tigger.ws>" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	echo "Description: Linux conscriptor" >> $(NAME)-$(VERSION)-$(RELEASE)/DEBIAN/control
+	
+	- find $(NAME)-$(VERSION)-$(RELEASE) -name '*svn' -exec rm -fr {} \;
+	sudo chown -R root.root $(NAME)-$(VERSION)-$(RELEASE)
+	dpkg-deb --build $(NAME)-$(VERSION)-$(RELEASE)
+	sudo rm -fr $(NAME)-$(VERSION)-$(RELEASE)
+

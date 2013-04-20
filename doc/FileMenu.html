@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>File Menu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<div align="center">
+  <h4><font face="Arial, Helvetica, sans-serif"><strong>File Menu</strong> </font></h4>
+</div>
+<p> <font size="5" face="Arial, Helvetica, sans-serif"><a href="#_New"><strong>New</strong></a><strong><br>
+  <a href="#_Open">Open</a><br>
+  <a href="#_Import_BDF_Font">Import BDF Font</a><br>
+  <a href="#_Import_Image">Import Image</a><br>
+  <a href="#_Concatenate_Fonts">Concatenate Fonts</a><br>
+  <a href="#_Save">Save</a><br>
+  <a href="#_Save_As">Save As</a><br>
+  <a href="#_Print">Print</a><br>
+  <a href="#_Print_Preview">Print Preview</a><br>
+  <a href="#_Exit">Exit</a></strong></font></p>
+<p>&nbsp; </p>
+<p> <font size="5" face="Arial, Helvetica, sans-serif"><a name="_New"></a><strong>New</strong></font></p>
+<p class=MsoNormal><font size="5" face="Arial, Helvetica, sans-serif">Creates 
+  a new BOB-4 font document<span
+style='font-size:10.0pt;font-family:Helv;mso-bidi-font-family:Helv'>.<o:p></o:p></span><span style='font-size:10.0pt;
+font-family:Helv;mso-bidi-font-family:Helv'><o:p></o:p></span> The default settings 
+  are for an 8x14 pixel ASCII font with 1bpp (one bit per pixel) starting at code 
+  value 32 (decimal).<span style='font-size:10.0pt;
+font-family:Helv;mso-bidi-font-family:Helv'><o:p></o:p></span></font></p>
+<p class=MsoNormal align=center style='text-align:center'> <font size="5" face="Arial, Helvetica, sans-serif"> 
+  <img src="ImgFileMenu1.png"> </font></p>
+<p class=MsoNormal><font size="5" face="Arial, Helvetica, sans-serif"><o:p></o:p></font></p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Open"></a><strong>Open</strong></font></p>
+<p><font size="5" face="Arial, Helvetica, sans-serif">Opens an existing BOB-4 
+  font document<span style='font-size:10.0pt;font-family:Helv;mso-bidi-font-family:
+Helv'>.</span></font></p>
+<p>&nbsp;</p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Import_BDF_Font"></a><strong>Import 
+  BDF Font</strong></font></p>
+<p class=MsoNormal><font size="5" face="Arial, Helvetica, sans-serif">Opens a 
+  BDF font file and converts it to a BOB-4 font format file. After the BDF file 
+  is selected, the &#8220;Import Font&#8221; dialog box is opened. This dialog 
+  allows you to set the BOB-4 font name, choose whether to import the font as 
+  1bpp or 2bpp (bits per pixel), and specify which characters to import.</font></p>
+<p class=MsoNormal align=center style='text-align:center'> <font size="5" face="Arial, Helvetica, sans-serif"> 
+  <img src="ImgFileMenu2.png"> </font></p>
+<blockquote> 
+  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif"><strong>Font 
+    Name:<br>
+    <br>
+    </strong>The internal name of the font (not the file name). This is the name 
+    that appears in the BOB-4 configuration report. The Font Name must be placed 
+    in the BOB-4 <em>String</em> buffer in order to select a font by name with 
+    the <strong>z</strong> command. Font Names can be revised through the Edit--&gt;Font 
+    Name menu. <br>
+    <br>
+    The two fields below Font Name display the number of character glyphs included 
+    in the BDF source file and its first character's code value.<br>
+    <br>
+    <strong>Retain encoding by filling gaps with zero width characters:</strong> 
+    </font></p>
+  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif">The 
+    BOB-4 font format requires consecutive character encoding. BDF fonts sometimes 
+    have code gaps, which alters imported character coding for characters following 
+    the gaps. The Conscriptor adds zero-width character placeholders to fill such 
+    gaps if this option is checked. Characters with zero width are not displayed 
+    in the BOB-4 Conscriptor Font Editor, but each one consumes six bytes of file 
+    space.<o:p><br>
+    <br>
+    </o:p><strong>Pixel Depth:<br>
+    <br>
+    </strong>Controls the desired pixel depth (in bits per pixel) for imported 
+    fonts. Can be changed later with the Edit--&gt;Pixel Depth menu selection.<br>
+    <br>
+    <strong>Encoding of first character to import:</strong></font></p>
+  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif">This 
+    field selects the first character imported from the BDF font. By default it 
+    is set to the first character in the font.<br>
+    <br>
+    <strong>Number of characters to import:</strong></font></p>
+  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif">The 
+    total number of characters to import. Defaults to 95, which is the number 
+    of printable ASCII characters.</font></p>
+</blockquote>
+<p class=MsoNormal>&nbsp;</p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Import_Image"></a><strong>Import 
+  Image</strong><br>
+  <br>
+  Opens a bitmap image file and converts it to a single-character BOB-4 font file. 
+  The BOB-4 Conscriptor can import graphics files of the following types:</font> 
+</p>
+<p class=MsoNormal><font size="4" face="Arial, Helvetica, sans-serif"><strong>bmp, 
+  ico, jif, jfif, jpeg, jpg, jpg, koa, koala, pbm, pcd, pcx, pgm, png, ppm, ras, 
+  targa, tga, tif, tiff, ttf</strong></font><font size="5" face="Arial, Helvetica, sans-serif"><br>
+  <br>
+  Image size must not exceed 255x255 pixels. Monochrome 1bpp (one bit per pixel) 
+  images may be imported directly. Images with more than two colors must be converted 
+  to two or three colors (1bpp or 2bpp). In these cases, imported images are first 
+  displayed in 8-bit greyscale, and then conversion threshold levels must be manually 
+  adjusted using the &#8220;White Threshold&#8221; and &#8220;Black Threshold&#8221; 
+  sliders in the &#8220;Threshold Image&#8221; dialog box. Black Threshold is 
+  inactive for 1bpp conversions. Images may be negated with the &#8220;Invert 
+  Image&#8221; button. When image conversion is optimized, click &quot;OK,&quot; 
+  then (in Font Editor) <strong>save the image as a BOB-4 font</strong>. Converted 
+  images may also be saved as BMP files before clicking OK in the Threshold Image 
+  dialog. See <a
+href="ImportingImages.html">Importing Images</a> for more information about using 
+  images.</font></p>
+<p class=MsoNormal>&nbsp;</p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Concatenate_Fonts"></a><strong>Concatenate 
+  Fonts</strong><br>
+  <br>
+  Combines two or more font files for downloading to BOB-4. Select desired files 
+  from the &#8220;Open&#8221; dialog box. Select multiple files by holding the 
+  <strong>Ctrl</strong> key as you left-click the desired files. After files are 
+  selected, left-click the &#8220;Open&#8221; button. When the &#8220;Save&#8221; 
+  Dialog appears, select a file name for the concatenated font file and left-click 
+  the &#8220;Save&#8221; button.</font> </p>
+<p>&nbsp;</p>
+
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Save"></a><strong>Save</strong><br>
+  <br>
+  Saves an open BOB-4 font file without changing the file name (overwrites the 
+  previous version).</font> </p>
+<p>&nbsp;</p>
+
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Save_As"></a><strong>Save 
+  As</strong><br>
+  <br>
+  Requests a new file name for saving an open BOB-4 font file.</font> </p>
+<p>&nbsp;</p>
+
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Print"></a><strong>Print</strong><br>
+  <br>
+  Prints the current fontset on the system printer<span style="font-family: Helv; font-size: 10.0pt;">.</span></font> 
+</p>
+<p>&nbsp; </p>
+
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Print_Preview"></a><strong>Print 
+  Preview (not implemented)</strong></font></p>
+<p>&nbsp;</p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Exit"></a><strong>Exit</strong><br>
+  <br>
+  Quits the BOB-4 Conscriptor program and returns control to the operating system.</font> 
+</p>
+</body>
+
+</html>

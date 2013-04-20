@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Configuration Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h4 align="center"><font face="Arial, Helvetica, sans-serif">Configuration Editor</font></h4>
+<p align="center">&nbsp;</p>
+<p><font size="5" face="Arial, Helvetica, sans-serif">T</font><font size="2" face="Arial, Helvetica, sans-serif">he 
+  Configuration Editor allows you to create, edit, save, and install BOB-4 module 
+  configurations. For a complete listing and explanation of configuration settings, 
+  look up the <strong>v</strong> command in the <a href="xbag.html" target="_blank">BOB-4 
+  Application Guide</a>. Numbers given in the Configuration Editor's control labels 
+  (like this) correspond to &quot;n&quot; parameters associated with the <strong>v</strong> 
+  command.<br>
+  <br>
+  <br>
+  <strong>XBOB-4 Supplemental Font Memory<br>
+  </strong><br>
+  To enable the standard 512kB supplemental font memory device in XBOB-4 (Atmel 
+  AT45DB041D), go to the &quot;Comm&quot; tab in the Configuration Editor:</font> 
+</p>
+<p align="center"><img src="ImgConfigEd2.png"></p>
+<p><font size="5" face="Arial, Helvetica, sans-serif">Under &quot;SPI 0 (56),&quot; 
+  select &quot;1-Device Present&quot; and set &quot;Rate (60)&quot; to 4. After 
+  downloading this configuration and rebooting, memory device zero becomes available 
+  for custom font storage. Actual SPI clock rate is 12 MHz (48 MHz / 4), which 
+  is the maximum usable rate in current XBOB-4 hardware.<br>
+  <br>
+  <br>
+  <strong>Download</strong><br>
+  <br>
+  Transmits the current configuration settings to BOB-4 using communication parameters 
+  previously chosen in the <a href="SerialMenu.htm">Serial Menu</a>. The new configuration 
+  is automatically saved in flash memory. Configuration downloads are not possible 
+  through BOB-4's debug port. Note that most configuration settings do not take 
+  effect immediately after a configuration download. It's often necessary to reboot 
+  BOB-4 (or XBOB-4) in order to use the new configuration.<br>
+  <br>
+  <br>
+  <strong>Cancel<br>
+  </strong><br>
+  Cancels all changes and exits the Configuration Editor.<br>
+  <br>
+  <br>
+  <strong>Save File</strong><br>
+  <br>
+  Saves the current configuration settings to disk. A BOB-4 configuration file 
+  is plain ASCII text, including commands to set all configuration options as 
+  well as a command to store configuration data to flash memory in BOB-4. This 
+  file can also be edited by standard text editing tools and transmitted to BOB-4 
+  through a terminal program, etc. Text editors are usually capable of entering 
+  control codes such as &lt;ESC&gt;, but methods for accomplishing this are inconsistent.<br>
+  <br>
+  <br>
+  <strong>Load File</strong><br>
+  <br>
+  Loads a previously saved BOB-4 configuration file from disk.</font></p>
+</body>
+</html>

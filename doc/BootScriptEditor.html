@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>BootScript Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<h4 align="center"><font face="Arial, Helvetica, sans-serif">Bootscript Editor</font></h4>
+<p>&nbsp;</p>
+<p align="center"><img src="ImgBootEd1.png"></p>
+<p><font size="5" face="Arial, Helvetica, sans-serif">BOB-4 can store up to 1024 
+  characters of bootscript text in a reserved segment of flash memory. Bootscripts 
+  are always executed immediately after BOB-4 system initialization, before processing 
+  any data received through the control ports. Bootscript Editor offers a convenient 
+  way to create, edit, save, and download bootscripts to BOB-4 modules.<br>
+  <br>
+  Bootscript Editor saves bootscript files in plain ASCII format. This allows 
+  editing with many standard text editors, but methods for entering the &lt;ESC&gt; 
+  code will vary.<br>
+  <br>
+  To clear an existing BOB-4 bootscript, just execute a Download with the edit 
+  window empty.</font><font size="5" face="Arial, Helvetica, sans-serif"><br>
+  <br>
+  When downloading a bootscript to BOB-4, Bootscript Editor automatically brackets 
+  it with String Start (&lt;ESC&gt;X) and String End (&lt;ESC&gt;\) codes, and 
+  then issues the Capture Bootscript (&lt;CSI&gt;8v) and Save Configuration (&lt;CSI&gt;1v) 
+  commands. These commands must therefore <strong>not</strong> be included in 
+  the user's bootscript. Almost any other sequence of text and commands that is 
+  legal for transmission to BOB-4 through a control port is also acceptable in 
+  a bootscript, but there are a couple of important exceptions:</font></p>
+<ol>
+  <li><font size="5" face="Arial, Helvetica, sans-serif">Don't put the reboot 
+    command in a bootscript. This is recursive, and a real show-stopper.</font></li>
+  <li><font size="5" face="Arial, Helvetica, sans-serif">Don't put &lt;CSI&gt;1v 
+    (Save Configuration) in a bootscript. It will wear out the flash memory.</font></li>
+</ol>
+<p><font size="5" face="Arial, Helvetica, sans-serif">In general, configuration 
+  commands don't belong in bootscripts unless they are meant to be temporary. 
+  It's usually best to store a new configuration instead of repeatedly issuing 
+  an identical salvo of configuration commands. Users might see this issue differently, 
+  especially when there's a desire to keep all of BOB-4's setup data in one block 
+  of controller source code. Be especially careful of bootscript configuration 
+  changes that affect screen geometry. As noted in the <a href="xbag.html" target="_blank">BOB-4 
+  Application Guide</a>, the display will be cleared after an unpredictable delay 
+  time. This often has the effect of immediately erasing text that was printed 
+  by the bootscript.<br>
+  <br>
+  <br>
+  <strong>Edit Window</strong><br>
+  <br>
+  Use this window to enter and edit bootscript text. To insert BOB-4 control codes, 
+  see comments below.<br>
+  <br>
+  <br>
+  <strong>Insert &lt;CSI&gt;</strong><br>
+  <br>
+  Insert the two-byte Control Sequence Introducer&nbsp;to preface BOB-4 commands 
+  in the bootscript.<br>
+  <br>
+  <br>
+  <strong>Insert &lt;CR/LF&gt;<br>
+  </strong><br>
+  Insert a Carriage Return &amp; Line Feed pair into the bootscript. This is necessary 
+  to distinguish <strong>executable</strong> CR/LF codes from CR/LF used for text 
+  formatting in the edit window.<br>
+  <br>
+  <br>
+  <strong>String Start</strong><br>
+  <br>
+  Insert a String Start control sequence, marking the start of a text string that 
+  will be loaded into BOB-4's <em>String</em> buffer when the bootscript executes. 
+  Some BOB-4 commands (e.g. Crawl) act on text which must be loaded into the <em>String</em> 
+  buffer prior to issuing the command. Comments may be embedded in bootscripts 
+  by bracketing them with String Start and String End codes, but available bootscript 
+  storage space is reduced. <br>
+  <br>
+  <br>
+  <strong>String End</strong><br>
+  <br>
+  Insert a String End control sequence, marking the termination of a text string 
+  that will be loaded into BOB-4's <em>String</em> buffer when the bootscript 
+  executes.<br>
+  <br>
+  <br>
+  <strong>Save</strong><br>
+  <br>
+  Save the currently open bootscript to a disk file (via Save As dialog).<br>
+  <br>
+  <br>
+  <strong>Load<br>
+  </strong><br>
+  Load an existing BOB-4 bootscript file from disk.<br>
+  <br>
+  <br>
+  <strong>Download</strong><br>
+  <br>
+  Download the currently open bootscript to a BOB-4 module and save it in flash 
+  memory, using communication parameters previously selected in the Serial menu. 
+  Previous contents of the bootscript memory are destroyed. Bootscripts cannot 
+  be downloaded through the debug port.<br>
+  <br>
+  <br>
+  <strong>Exit</strong><br>
+  <br>
+  Quit the Bootscript Editor.</font></p>
+</body>
+</html>

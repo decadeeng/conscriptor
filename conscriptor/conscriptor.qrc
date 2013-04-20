@@ -1,0 +1,26 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/new.png</file>
+    <file>icons/open.png</file>
+    <file>icons/save.png</file>
+    <file>icons/print.png</file>
+    <file>icons/cut.png</file>
+    <file>icons/left.png</file>
+    <file>icons/right.png</file>
+    <file>icons/up.png</file>
+    <file>icons/down.png</file>
+    <file>icons/copy.png</file>
+    <file>icons/paste.png</file>
+    <file>icons/fonts.png</file>
+    <file>icons/bootscript.png</file>
+    <file>icons/config.png</file>
+    <file>icons/setup.png</file>
+    <file>icons/rollup.png</file>
+    <file>icons/rolldown.png</file>
+    <file>icons/codeval.png</file>
+    <file>icons/on.png</file>
+    <file>icons/off.png</file>
+    <file>icons/bug.png</file>
+    <file>icons/fast.png</file>
+</qresource>
+</RCC>

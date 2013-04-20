@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE>Serial Menu</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
+	<META NAME="CREATED" CONTENT="20080227;15465367">
+	<META NAME="CHANGEDBY" CONTENT="Eric Jennings">
+	<META NAME="CHANGED" CONTENT="20080228;7311115">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 8.5in 11in }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H4 ALIGN=CENTER><FONT FACE="Arial, Helvetica, sans-serif">Serial
+Menu</FONT></H4>
+<P><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Port</FONT></FONT></STRONG><BR><BR><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Select
+the host PC serial port connected to BOB-4/XBOB-4.<BR><BR><BR></FONT></FONT><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Baud
+Rate</FONT></FONT></STRONG></P>
+<P><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Select the
+baud rate for communication with BOB-4's main serial port. Default is
+9600 bps. This value must match the rate currently in use by BOB-4,
+unless communication is through BOB-4's debug port. Baud rate
+selection is inactive for the debug port because it's fixed by design
+to 115.2 kbps in BOB-4. In XBOB-4, the debug port is only available
+internally (not on the rear panel).<BR><BR><BR></FONT></FONT><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Download</FONT></FONT></STRONG></P>
+<BLOCKQUOTE><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Font 
+  (main port): </FONT></FONT></STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Download 
+  custom font to BOB-4 through the BOB-4 main serial port.<BR>
+  <BR>
+  <STRONG>Font (debug port): </STRONG>Download custom font to BOB-4 through the 
+  BOB-4 debug serial port.<BR>
+  <BR>
+  <STRONG>Firmware (main port): </STRONG>Download firmware upgrade to BOB-4 through 
+  the BOB-4 main serial port. See <A HREF="/../Work/Bob%204/mikes%20help/FirmwareUpgrades.htm">Firmware 
+  Upgrades</A>.<BR>
+  <BR>
+  <STRONG>Firmware (debug port): </STRONG>Download firmware upgrade to BOB-4 through 
+  the BOB-4 debug serial port. See <A HREF="/../Work/Bob%204/mikes%20help/FirmwareUpgrades.htm">Firmware 
+  Upgrades</A>.<BR>
+  <BR>
+  <STRONG>Firmware (repair): </STRONG>This option allows the user to download 
+  new firmware even if the current firmware is corrupted and nothing but BOB-4's 
+  bootloader is operating. To confirm this condition, connect to either the main 
+  or debug serial port at 115.2 kbps using a terminal program. At power up, the 
+  BOB-4 bootloader emits: </FONT></FONT><FONT FACE="Courier New, Courier, mono"><FONT SIZE=2><strong>BOB4 
+  boot loader (s: 4.1.2)</strong></FONT></FONT>
+  <p><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Close the connection 
+    to the terminal program before proceeding. In the Serial menu, make sure that 
+    the correct PC COM port is selected. The Baud Rate setting doesn't matter 
+    in this case because BOB-4's bootloader operates only at 115.2 kbps. Select 
+    Serial--&gt;Download--&gt;Firmware (repair). Select the desired BOB-4 firmware 
+    file (B4Vxxx.enc) in the Open File dialog when it appears. When the download 
+    is complete, BOB-4 resets itself and launches the new firmware.</FONT></FONT></p>
+</BLOCKQUOTE>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><br>
+  </font><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Terminal</FONT></FONT></STRONG></p>
+<blockquote> 
+  <p style="margin-right: 0.39in"><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2><SPAN STYLE="font-weight: medium">Opens 
+    a simple serial communication terminal emulator. Clicking the &quot;Connect&quot; 
+    button opens the currently selected PC COM port at the current baud rate setting. 
+    If the port is successfully opened, then button text changes to &quot;Disconnect.&quot; 
+    Clicking the button again closes the port.<br>
+    <br>
+    Text typed into the Transmit window is transmitted over the serial port to 
+    BOB-4. Messages received from BOB-4 are displayed in the Receive window. Escape 
+    &lt;ESC&gt; is sent by pressing the keyboard &quot;Esc&quot; key. The &quot;Enter&quot; 
+    key sends Carriage Return &lt;CR&gt; <em>and</em> Line Feed &lt;LF&gt; to 
+    BOB-4. </SPAN></FONT></FONT> </p>
+</blockquote>
+<P ALIGN=CENTER><IMG SRC="ImgTerminal.png" NAME="graphics1" ALIGN=BOTTOM WIDTH=414 HEIGHT=384 BORDER=0></P>
+<P ALIGN=CENTER>&nbsp;</P>
+</BODY>
+</HTML>

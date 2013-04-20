@@ -1,0 +1,24 @@
+NAME = conscriptor
+VERSION = 1.0
+RELEASE = "$(shell git log |grep commit |wc -l)"
+
+all:
+	mkdir -p $(NAME)-$(VERSION)
+	./version.sh
+
+	cp -a conscriptor serial $(NAME)-$(VERSION)
+	cp -a "BDF files" $(NAME)-$(VERSION)
+	cp -a "BOB-4 Font Files" $(NAME)-$(VERSION)
+	cp -a doc $(NAME)-$(VERSION)
+	cp conscriptor.pro $(NAME)-$(VERSION)
+
+	tar cvzf ~/rpmbuild/SOURCES/$(NAME)-$(VERSION).tar.gz --exclude '*svn*' $(NAME)-$(VERSION)
+
+	echo "Name:      $(NAME)"     > ~/rpmbuild/SPECS/$(NAME).spec
+	echo "Version:   $(VERSION)" >> ~/rpmbuild/SPECS/$(NAME).spec
+	echo "Release:   $(RELEASE)" >> ~/rpmbuild/SPECS/$(NAME).spec
+	cat spec >> ~/rpmbuild/SPECS/$(NAME).spec
+
+	rm -fr $(NAME)-$(VERSION)
+	rpmbuild -ba ~/rpmbuild/SPECS/$(NAME).spec
+
