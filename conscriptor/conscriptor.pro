@@ -5,8 +5,8 @@ SUBDIRS = serial
 DEPENDPATH += .
 INCLUDEPATH += ../serial
 
-# CONFIG += release
-CONFIG += debug
+CONFIG += release
+# CONFIG += debug
 
 # To get tty qDebug messages
 # CONFIG += console
