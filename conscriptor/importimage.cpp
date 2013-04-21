@@ -20,7 +20,7 @@ ImportImageDialog::ImportImageDialog(QWidget *parent)
 
     b4font = qobject_cast<B4Font*>(parent);
     readSettings ();
-    setLayout (horizontalLayout);
+    setLayout (horizontalLayout_2);
 
     QString imageFile = QFileDialog::getOpenFileName(this, tr ("read image"), "",
 	tr ("images (*.bmp *.gif *.jpg *.jpeg *.png *.pbm *.pgm *.ppm *.tiff *.xbm *.xpm)"));
