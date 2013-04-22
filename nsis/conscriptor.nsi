@@ -57,7 +57,7 @@ Section "conscriptor" conscriptor
  
 ;  File ..\conscriptor\debug\conscriptor.exe
   File ..\conscriptor\release\conscriptor.exe
-  File ..\serial\mingw\qextserialport.dll
+;  File ..\serial\mingw\qextserialport.dll
   File ..\bob.ico
   File mingwm10.dll
   File libgcc_s_dw2-1.dll
@@ -65,6 +65,7 @@ Section "conscriptor" conscriptor
   File QtCore4.dll
   File QtGuid4.dll
   File QtGui4.dll
+  File libstdc++-6.dll
 
   File /r imageformats
   File /r ..\*.bdf
