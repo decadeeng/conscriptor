@@ -1849,8 +1849,8 @@ bool Conscriptor::configDownload (QByteArray &ba)
 	    ba.replace ("[", "config ");
 	    ba.replace (';', '=');
 	    ba.replace ('v', '\n');
-qDebug () << ba;
-	    return true;
+	    //qDebug () << ba;
+	    // fall thru
 	case XBOBP:
 	    statusBar()->showMessage(tr("Download config"), 3000);
 	    ttyPort->write (ba);
