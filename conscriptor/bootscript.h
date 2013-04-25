@@ -13,7 +13,6 @@ class BootscriptDialog : public QDialog, public Ui::BootscriptDialog
 public:
     BootscriptDialog(QWidget *parent = 0);
     Conscriptor *conscriptor;
-    QByteArray ba;
 
 private slots:
     void on_buttonLoadfile_clicked ();

@@ -20,7 +20,7 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonLoadfile_clicked ()
 {
-    curFile = QFileDialog::getOpenFileName(this, tr ("read bootscript files"), "", tr ("(*.b4b)"));
+    curFile = QFileDialog::getOpenFileName(this, tr ("read bootscript files"), "", "(*.b4b *.b4j)");
     if (curFile.isEmpty())
         return;
 
@@ -32,14 +32,31 @@ void BootscriptDialog::on_buttonLoadfile_clicked ()
 		.arg(file.errorString()));
         return;
     }
-    QTextStream fil(&file);
-    QString data;
-    for (;;) {
-	data = fil.readLine (100);
-	if (data.isEmpty())
-	    break;
-	plainTextEdit->insertPlainText (data);
+
+    QByteArray ba = file.readAll ();
+    /*---------------------------------------------------------------------------------------------
+     * Translate b4b files to tagged format b4j
+     *-------------------------------------------------------------------------------------------*/
+    if ((curFile.endsWith (".b4b"))) {
+	ba.replace ("\r\n", "<CRLF>");
+	ba.replace ('\r',   "<CR>");
+	ba.replace ('\n',   "<LF>");
+	ba.replace ("[",  "<CSI>");
+	ba.replace ("Q",  "<ESCQ>");
+	ba.replace ("R",  "<ESCR>");
+	ba.replace ("\n\r", "");
     }
+    else {
+	/*-----------------------------------------------------------------------------------------
+	 * Cleanup any editor fiddling on any os b4j's
+	 *---------------------------------------------------------------------------------------*/
+	ba.replace ("\n\r", "");
+	ba.replace ("\r\n", "");
+	ba.replace ('\r', "");
+	ba.replace ('\n', "");
+    }
+    QString data (ba);
+    plainTextEdit->setPlainText (data);
     plainTextEdit->setFocus (Qt::OtherFocusReason);
     buttonDownload->setEnabled (true);
     modified = false;
@@ -51,10 +68,10 @@ void BootscriptDialog::on_buttonLoadfile_clicked ()
 void BootscriptDialog::on_buttonSavefile_clicked ()
 {
     QString fileName = QFileDialog::getSaveFileName (this, tr ("Save File"), curFile,
-	    tr("booscript files (*.b4b)"));
+	    tr("booscript files (*.b4j)"));
 
-    if (!fileName.endsWith (".b4b"))
-	fileName.append (".b4b");
+    if (!fileName.endsWith (".b4j"))
+	fileName.append (".b4j");
 
     QFile file(fileName);
     if (!file.open(QFile::ReadWrite | QFile::Text)) {
@@ -65,9 +82,10 @@ void BootscriptDialog::on_buttonSavefile_clicked ()
         return;
     }
 
-    QTextStream out (&file);
-    QString data = plainTextEdit->toPlainText();
-    out << data.toAscii();
+    QByteArray ba;
+    ba.append (plainTextEdit->toPlainText());
+    file.write (ba);
+    file.close ();
     modified = false;
 }
 
@@ -77,7 +95,18 @@ void BootscriptDialog::on_buttonSavefile_clicked ()
 void BootscriptDialog::on_buttonDownload_clicked ()
 {
     conscriptor->statusBar()->showMessage(tr("Download bootscript"), 6000);
-    ba = plainTextEdit->toPlainText ().toAscii ();
+    QByteArray ba = plainTextEdit->toPlainText ().toAscii ();
+    /*---------------------------------------------------------------------------------------------
+     * resolve the tags
+     * sanitize the file of <CR><LF>
+     *-------------------------------------------------------------------------------------------*/
+    ba.replace ("\r\n", "");
+    ba.replace ("<CSI>",  "[");
+    ba.replace ("<ESCQ>", "Q");
+    ba.replace ("<ESCR>", "R");
+    ba.replace ("<CRLF>", "\r\n");
+    ba.replace ("<CR>",   "\r");
+    ba.replace ("<LF>",   "\n");
     if ((conscriptor->bootscriptDownload (ba)))
 	buttonDownload->setEnabled (false);
     conscriptor->statusBar()->showMessage(tr("Download complete"), 6000);
@@ -88,7 +117,7 @@ void BootscriptDialog::on_buttonDownload_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCSI_clicked ()
 {
-    plainTextEdit->insertPlainText ("[");
+    plainTextEdit->insertPlainText ("<CSI>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -97,7 +126,7 @@ void BootscriptDialog::on_buttonCSI_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCRLF_clicked ()
 {
-    plainTextEdit->insertPlainText ("\r\n");
+    plainTextEdit->insertPlainText ("<CRLF>\n");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -106,16 +135,16 @@ void BootscriptDialog::on_buttonCRLF_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonStrString_clicked ()
 {
-    plainTextEdit->insertPlainText ("Q");
+    plainTextEdit->insertPlainText ("<ESCQ>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
 /*-------------------------------------------------------------------------------------------------
- *
+ * on_buttonEndString_clicked --
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonEndString_clicked ()
 {
-    plainTextEdit->insertPlainText ("R");
+    plainTextEdit->insertPlainText ("<ESCR>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 

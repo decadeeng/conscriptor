@@ -46,8 +46,8 @@ Helv'>.</span></font></p>
 <p class=MsoNormal align=center style='text-align:center'> <font size="5" face="Arial, Helvetica, sans-serif"> 
   <img src="ImgFileMenu2.png"> </font></p>
 <blockquote> 
-  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif"><strong>Font 
-    Name:<br>
+  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif"><strong>Font Name:
+    <br>
     <br>
     </strong>The internal name of the font (not the file name). This is the name 
     that appears in the BOB-4 configuration report. The Font Name must be placed 
@@ -57,16 +57,6 @@ Helv'>.</span></font></p>
     <br>
     The two fields below Font Name display the number of character glyphs included 
     in the BDF source file and its first character's code value.<br>
-    <br>
-    <strong>Retain encoding by filling gaps with zero width characters:</strong> 
-    </font></p>
-  <p class="MsoNormal"><font size="5" face="Arial, Helvetica, sans-serif">The 
-    BOB-4 font format requires consecutive character encoding. BDF fonts sometimes 
-    have code gaps, which alters imported character coding for characters following 
-    the gaps. The Conscriptor adds zero-width character placeholders to fill such 
-    gaps if this option is checked. Characters with zero width are not displayed 
-    in the BOB-4 Conscriptor Font Editor, but each one consumes six bytes of file 
-    space.<o:p><br>
     <br>
     </o:p><strong>Pixel Depth:<br>
     <br>
@@ -84,29 +74,65 @@ Helv'>.</span></font></p>
     of printable ASCII characters.</font></p>
 </blockquote>
 <p class=MsoNormal>&nbsp;</p>
-<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Import_Image"></a><strong>Import 
-  Image</strong><br>
-  <br>
-  Opens a bitmap image file and converts it to a single-character BOB-4 font file. 
-  The BOB-4 Conscriptor can import graphics files of the following types:</font> 
-</p>
-<p class=MsoNormal><font size="4" face="Arial, Helvetica, sans-serif"><strong>bmp, 
-  ico, jif, jfif, jpeg, jpg, jpg, koa, koala, pbm, pcd, pcx, pgm, png, ppm, ras, 
-  targa, tga, tif, tiff, ttf</strong></font><font size="5" face="Arial, Helvetica, sans-serif"><br>
-  <br>
-  Image size must not exceed 255x255 pixels. Monochrome 1bpp (one bit per pixel) 
-  images may be imported directly. Images with more than two colors must be converted 
-  to two or three colors (1bpp or 2bpp). In these cases, imported images are first 
-  displayed in 8-bit greyscale, and then conversion threshold levels must be manually 
-  adjusted using the &#8220;White Threshold&#8221; and &#8220;Black Threshold&#8221; 
-  sliders in the &#8220;Threshold Image&#8221; dialog box. Black Threshold is 
-  inactive for 1bpp conversions. Images may be negated with the &#8220;Invert 
-  Image&#8221; button. When image conversion is optimized, click &quot;OK,&quot; 
-  then (in Font Editor) <strong>save the image as a BOB-4 font</strong>. Converted 
-  images may also be saved as BMP files before clicking OK in the Threshold Image 
-  dialog. See <a
-href="ImportingImages.html">Importing Images</a> for more information about using 
-  images.</font></p>
+<p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_ImportingImages.html">Importing Images</a></p>
+  <h4 align="center"><font face="Arial, Helvetica, sans-serif">Importing Images </font></h4>
+  <p></p>
+  <p align="center"><img src="ImgImportImg1.png" width="725" height="429"></p>
+  <p><font size="5" face="Arial, Helvetica, sans-serif">
+    For display by BOB-4 modules, bitmap image files must be converted into BOB-4 font (.b4f) files.
+    <br>
+    Imported images are converted to single-character fonts which may then be downloaded to BOB-4 
+    and stored in flash memory.
+    <br>
+    The BOB-4 Conscriptor can import bitmap graphics files of the following types:
+    <br>
+    <strong>bmp, gif, jpeg, jpg, png, pbm, pgm, tiff, xbm, xpm
+    <br>
+    <br>
+    Image Conversion</strong></p>
+  <p><font size="5" face="Arial, Helvetica, sans-serif">
+    In order to be displayed by BOB-4, the color depth of an image must be either two-color (one bit per 
+    pixel; 1bpp) or three-color (2bpp) and the font must be smaller than 255x255.
+    <br>
+     1bpp images may be imported directly. In all other cases, imported 
+    images are first converted to 8-bit greyscale and displayed in the right pane 
+    of the &quot;Threshold Image&quot; dialog.
+    <br>
+    Threshold levels (white level for 1bpp; white and black level for 2 bpp) must then be manually
+    adjusted using the &#8220;White Threshold&#8221; and &#8220;Black Threshold&#8221; sliders 
+    for best visual results.
+    <br>
+    For a 2bpp image, any color value below the black threshold is rendered
+    black (local mode) or transparent (genlock mode). Any color value above the white threshold 
+    is rendered white. Values between the thresholds are rendered grey (local mode) 
+    or halftone (genlock mode). Black and white pixels may be reversed with the 
+    &#8220;Invert Image&#8221; button.
+    <br>
+    &#8220;Black + White&#8221; button will display the image in your chosen color set.
+    <br>
+    Imported images may optionally be saved with &#8220;Save Modified Image&#8221; button,
+    these images are not directly usable as BOB-4 font files.
+  </p>
+  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Saving and Downloading to BOB-4</strong></p>
+  <p><font size="5" face="Arial, Helvetica, sans-serif">
+    After clicking the Threshold Image &#8220;OK&#8221; button, the Font Editor will be activated.
+    <br>
+    <strong>In Font Editor</strong>, you may save the converted image as a font file.
+    <br>
+    This file can then be downloaded to BOB-4 through the Serial--&gt;Download--&gt;Font menu. 
+    <br>
+    Image fonts may be combined with other BOB-4 font files and stored in a single 
+    memory device. To make BOB-4 display the image, select the desired image font 
+    (see <strong>z</strong> command) and send BOB-4 a space &lt;SP&gt; character (ASCII 32 or 0x20).
+  </p>
+  <p><font size="5" face="Arial, Helvetica, sans-serif">
+    NOTE: Horizontal compression of images will occur with BOB-4's default display settings.
+    To fix this, reconfigure BOB-4 to yield 'square pixels' (4:3 aspect ratio), or pre-compensate images 
+    with &#8220;FixPAL&#8221; button or &#8220;FixNTSC&#8221; as appropriate.
+    In the <a href="xbag.html" target="_blank">BOB-4 Application Guide</a>, see the <strong>v</strong>r
+    command (n=20~23).
+  </p>
+
 <p class=MsoNormal>&nbsp;</p>
 <p><font size="5" face="Arial, Helvetica, sans-serif"><a name="_Concatenate_Fonts"></a><strong>Concatenate 
   Fonts</strong><br>

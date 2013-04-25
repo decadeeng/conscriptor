@@ -137,12 +137,12 @@ void SetupDialog::on_buttonLoadB4F_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void SetupDialog::on_buttonSaveFile_clicked ()
 {
-    QByteArray ba = "boot=";
-    ba += bootEdit->text ();
-    ba += "\nconfig=";
-    ba += configEdit->text ();
-    ba += "\nfont=";
+    QByteArray ba = "Font=";
     ba += fontEdit->text ();
+    ba += "\nConfig=";
+    ba += configEdit->text ();
+    ba += "\nBoot=";
+    ba += bootEdit->text ();
     ba += '\n';
 
     QString fileName = QFileDialog::getSaveFileName(this, "setup save file name", "",
