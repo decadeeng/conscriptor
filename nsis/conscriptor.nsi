@@ -70,7 +70,7 @@ Section "conscriptor" conscriptor
   File /r imageformats
   File /r ..\*.bdf
   File /r ..\*.b4f
-  File /r ..\*.html
+  File /r ..\doc
 
 ;create desktop shortcut
   CreateShortCut "$DESKTOP\conscriptor.lnk" "$INSTDIR\conscriptor.exe" "" "$INSTDIR\bob.ico"
