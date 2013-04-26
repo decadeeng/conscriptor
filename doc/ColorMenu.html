@@ -1,31 +1,45 @@
 <head>
 <title>Color Menu</title>
+<link rel='stylesheet' type='text/css' href='format.css'>
 </head>
-<h4 align="center"><font face="Arial, Helvetica, sans-serif">Color Menu</font></h4>
-<p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Transparent</strong><br>
-  <br>
-  Sets current pixel color to transparent, which is rendered green in Font Editor. 
-  When operating in local video mode, BOB-4 renders transparent pixels black.<br>
-  <br>
-  <br>
-  <strong>White</strong><br>
-  <br>
-  Sets current pixel color to white.<br>
-  <br>
-  <br>
-  <strong>Halftone</strong></font></p>
-<p><font size="5" face="Arial, Helvetica, sans-serif">Sets current pixel color 
-  to halftone, which is rendered gray in Font Editor. Halftone is disabled for 
-  1bpp fonts (one bit per pixel). Halftone pixels are rendered in 50% video (dark 
-  video) when BOB-4 is operating in genlock/overlay mode, but they're rendered 
-  gray in local video mode<br>
-  <br>
-  <br>
-  These descriptions apply only in the default character rendering mode (65) when 
-  BOB-4 displays the font. BOB-4 offers many other rendering options. See <strong>m</strong> 
-  command in the <a href="xbag.html" target="_blank">BOB-4 
-  Application Guide</a> for additional details.<o:p><br>
-  </o:p><o:p> </o:p><o:p> </o:p></font></p>
+
+  <p>
+    These descriptions apply only in the default character rendering mode (65) when 
+    BOB-4 displays the font. BOB-4 offers many other rendering options. See <strong>m</strong> 
+    command in the <a href="xbag.html" target="_blank">BOB-4 Application Guide</a>
+    for additional details.
+  </p>
+  <h2>Clear</h2>
+  <p>
+    Sets current pixel color to transparent.
+    When operating in local video mode, BOB-4 renders transparent pixels black.
+  </p>
+  <h2>Opaque</h2>
+  <p>
+    Sets current pixel color to opaque.
+    When operating in local video mode, BOB-4 renders opaque pixels white.
+  </p>
+  <h2>SeeThru</h2>
+  <p>
+    Sets current pixel color to halftone.
+    When operating in local video mode, BOB-4 renders halftone pixels grey.
+  </p>
+  <h2>Set Clear</h2>
+  <p>
+    Sets the font editor color set.
+  </p>
+  <h2>Set Opaque</h2>
+  <p>
+    Sets the font editor color set.
+  </p>
+  <h2>Set SeeThru</h2>
+  <p>
+    Sets the font editor color set.
+  </p>
+  <h2>Reset Defaut Colors</h2>
+  <p>
+    Retores the font editor color set to the default green-white-grey.
+  </p>
 </body>
 
 </html>

@@ -1,11 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><title>Firmware Upgrades</title>
+<link rel='stylesheet' type='text/css' href='format.css'>
 
 </head>
 <body>
-<h4 align="center"><font face="Arial, Helvetica, sans-serif">Firmware Upgrades</font></h4>
+<h4 align="center">
 <p>&nbsp;</p>
-<p><font face="Arial, Helvetica, sans-serif" size="5">BOB-4
+<p>BOB-4
 customers can obtain the most recent firmware programming files by
 making an explicit email request through the <a href="http://www.decadenet.com/contact/index.php" target="_blank">Contact</a> form at <a href="http://www.decadenet.com/" target="_blank">www.decadenet.com</a>.
 Please review the comments on firmware upgrade issues in the
@@ -14,45 +15,45 @@ installation is possible via BOB-4's main serial port or debug port.
 Use a terminal program or other means of confirming good communication
 to BOB-4, and then disconnect the terminal program from the port before
 proceeding!</font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5"><strong>Firmware
+<p>Firmware
 Upgrade Procedure</strong></font></p>
 <ol>
-<li><font face="Arial, Helvetica, sans-serif" size="5">Apply
+<li>Apply
 power to the BOB-4 module.</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">Select
+<li>Select
 the proper serial port in the Serial--&gt;Port menu.</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">If
+<li>If
 you are using the BOB-4 main serial port, then select the currently
 configured BOB-4 main port baud rate from the Serial--&gt;Baud Rate
 menu. Default is 9600bps. If you are using the BOB-4 debug port, then
 this step is not necessary because the debug port is fixed at 115.2kbps.</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">Select
+<li>Select
 either Serial--&gt;Download--&gt;Firmware (main port) or
 Serial--&gt;Download--&gt;Firmware (debug port).</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">When
+<li>When
 the Open File dialog appears, select the firmware upgrade file.</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">A
+<li>A
 progress bar dialog will appear to show file transfer progress.</font></li>
-<li><font face="Arial, Helvetica, sans-serif" size="5">When
+<li>When
 the programming operation is complete, BOB-4 resets itself and launches
 the new firmware.</font></li>
 </ol>
-<p><font face="Arial, Helvetica, sans-serif" size="5">This
+<p>This
 procedure may not succeed if BOB-4's firmware has become corrupted. As
 long as the bootloader in BOB-4 is still operational, new firmware can
 be installed by using the Serial--&gt;Download--&gt;Firmware
 (repair) procedure.<br>
-<p><font face="Arial, Helvetica, sans-serif" size="5"><strong>Firmware
+<p>Firmware
 Repair Procedure</strong></font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5">This
+<p>This
 option allows the user to download new firmware even if the current
 firmware is corrupted and nothing but BOB-4's bootloader is operating.
 To confirm this condition, connect to either the main or debug serial
 port at 115.2 kbps using a terminal program. At power up, the BOB-4
-bootloader emits: &#8220;<font face="Courier New, Courier, mono">----&nbsp;BOB4
+bootloader emits: &#8220;----&nbsp;BOB4
 boot loader (s: 4.1.2)</font>&#8221;</font> </p>
 </font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5">Close
+<p>Close
 the connection to the terminal program before proceeding. In the
 Conscriptor Serial menu, make sure that the correct PC COM port is
 selected. The Baud Rate setting doesn&#8217;t matter in this case because
@@ -61,9 +62,9 @@ Serial--&gt;Download--&gt;Firmware (repair). Select the desired
 BOB-4 firmware file (B4Vxxx.enc) in the Open File dialog when it
 appears. When the download is complete, BOB-4 resets itself and
 launches the new firmware.</font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5"><strong>USB/RS232
+<p>USB/RS232
 Adapters</strong></font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5">US</font><font face="Arial, Helvetica, sans-serif" size="2">B/RS-232
+<p>B/RS-232
 adapters can cause firmware upgrade
 problems even if normal communications with BOB-4 have been confirmed.
 It&#8217;s best to use a &#8216;real&#8217; PC RS-232 serial port (COM port) for
@@ -72,11 +73,11 @@ brand of USB adapter. We&#8217;ve heard that IOGEAR makes a reliable one, and
 it has been found at Wal-Mart. Decade Engineering staff hasn&#8217;t verified
 this report. EasySync dual RS-232 adapters have worked well in our shop.<br>
 <br>
-<p><font face="Arial, Helvetica, sans-serif" size="5"><strong>Notes:</strong></font></p>
+<p>
 Custom fonts are not affected by firmware programming sessions. The new
 firmware will discover any previously installed custom fonts and make
 them available for use.</font></p>
-<p><font face="Arial, Helvetica, sans-serif" size="5">BOB-4's
+<p>BOB-4's
 previous configuration settings should not be affected by firmware
 upgrades, but please review the Troubleshooting section of the <a href="xbag.html" target="_blank">BOB-4 Application Guide</a> if
 problems are encountered.</font></p>

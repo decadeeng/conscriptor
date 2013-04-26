@@ -1,76 +1,122 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
-	<TITLE>Serial Menu</TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.2  (Win32)">
-	<META NAME="CREATED" CONTENT="20080227;15465367">
-	<META NAME="CHANGEDBY" CONTENT="Eric Jennings">
-	<META NAME="CHANGED" CONTENT="20080228;7311115">
-	<STYLE TYPE="text/css">
-	<!--
-		@page { size: 8.5in 11in }
-	-->
-	</STYLE>
-</HEAD>
-<BODY LANG="en-US" DIR="LTR">
-<H4 ALIGN=CENTER><FONT FACE="Arial, Helvetica, sans-serif">Serial
-Menu</FONT></H4>
-<P><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Port</FONT></FONT></STRONG><BR><BR><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Select
-the host PC serial port connected to BOB-4/XBOB-4.<BR><BR><BR></FONT></FONT><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Baud
-Rate</FONT></FONT></STRONG></P>
-<P><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Select the
-baud rate for communication with BOB-4's main serial port. Default is
-9600 bps. This value must match the rate currently in use by BOB-4,
-unless communication is through BOB-4's debug port. Baud rate
-selection is inactive for the debug port because it's fixed by design
-to 115.2 kbps in BOB-4. In XBOB-4, the debug port is only available
-internally (not on the rear panel).<BR><BR><BR></FONT></FONT><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Download</FONT></FONT></STRONG></P>
-<BLOCKQUOTE><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Font 
-  (main port): </FONT></FONT></STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Download 
-  custom font to BOB-4 through the BOB-4 main serial port.<BR>
-  <BR>
-  <STRONG>Font (debug port): </STRONG>Download custom font to BOB-4 through the 
-  BOB-4 debug serial port.<BR>
-  <BR>
-  <STRONG>Firmware (main port): </STRONG>Download firmware upgrade to BOB-4 through 
-  the BOB-4 main serial port. See <A HREF="/../Work/Bob%204/mikes%20help/FirmwareUpgrades.htm">Firmware 
-  Upgrades</A>.<BR>
-  <BR>
-  <STRONG>Firmware (debug port): </STRONG>Download firmware upgrade to BOB-4 through 
-  the BOB-4 debug serial port. See <A HREF="/../Work/Bob%204/mikes%20help/FirmwareUpgrades.htm">Firmware 
-  Upgrades</A>.<BR>
-  <BR>
-  <STRONG>Firmware (repair): </STRONG>This option allows the user to download 
-  new firmware even if the current firmware is corrupted and nothing but BOB-4's 
-  bootloader is operating. To confirm this condition, connect to either the main 
-  or debug serial port at 115.2 kbps using a terminal program. At power up, the 
-  BOB-4 bootloader emits: </FONT></FONT><FONT FACE="Courier New, Courier, mono"><FONT SIZE=2><strong>BOB4 
-  boot loader (s: 4.1.2)</strong></FONT></FONT>
-  <p><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Close the connection 
-    to the terminal program before proceeding. In the Serial menu, make sure that 
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='format.css'>
+</head>
+<body>
+
+<h2>Port</h2>
+  <p>
+    Select the host PC serial port connected to the conscriptor card.
+    <br>
+    Any unlisted port may be entered directly into settings.
+  </p>
+
+  <h3>Locations Where Application Settings Are Stored</h3>
+
+  <p>
+    QSettings stores settings for an application
+    in up to four locations, depending on whether the settings are user-specific or system-wide
+    and whether the settings are application-specific or organization-wide. For simplicity,
+    we're assuming the organization is called Decade and the application is called Conscriptor.
+  </p>
+  <p>
+    On Unix systems, if the file format is NativeFormat, the following files are used by default:
+  </p>
+  <ul>
+    <li>$HOME/.config/Decade/Conscriptor.conf</li>
+    <li>$HOME/.config/Decade.conf</li>
+    <li>/etc/xdg/Decade/Conscriptor.conf</li>
+    <li>/etc/xdg/Decade.conf</li>
+  </ul>
+
+  <p>
+    On Mac OS X versions 10.2 and 10.3, these files are used by default:
+  </p>
+
+  <ul>
+    <li>$HOME/Library/Preferences/com.Decade.Conscriptor.plist</li>
+    <li>$HOME/Library/Preferences/com.Decade.plist</li>
+    <li>/Library/Preferences/com.Decade.Conscriptor.plist</li>
+    <li>/Library/Preferences/com.Decade.plist</li>
+  </ul>
+
+  <p>
+    On Windows, NativeFormat settings are stored in the following registry paths:
+  </p>
+
+  <ul>
+    <li>HKEY_CURRENT_USER\Software\Decade\Conscriptor</li>
+    <li>HKEY_CURRENT_USER\Software\Decade</li>
+    <li>HKEY_LOCAL_MACHINE\Software\Decade\Conscriptor</li>
+    <li>HKEY_LOCAL_MACHINE\Software\Decade</li>
+  </ul>
+  <p>
+    Note: On Windows, for 32-bit programs running in WOW64 mode, settings are stored in the
+    following registry path: HKEY_LOCAL_MACHINE\Software\WOW6432node.
+  </p>
+
+<h2>Baud Rate</h2>
+  <p>
+    Select the baud rate for communication with BOB-4's main serial port. Default is
+    9600 bps. This value must match the rate currently in use by BOB-4,
+    unless communication is through BOB-4's debug port.
+    <br><br>
+    You may enter any unlisted value directly into settings.
+    <br><br>
+    Baud rate selection is inactive for the debug port because it's fixed by design
+    to 115.2 kbps in BOB-4. In XBOB-4, the debug port is only available
+    internally (not on the rear panel).
+  </p>
+
+<h2>Download</h2>
+
+  <h3>Firmware</h3>
+  <p>
+    Debug or Main Port will be selected automatically
+    <br><br>
+    You may click the serial icon on the toolbar to confirm connectivity.
+    <br><br>
+    Download a valid firware file from http://www.decadeengineering.com. Status is reported on
+    the status bar.
+  </p>
+
+  <h3>Font</h3>
+  <p>
+    Debug or Main Port will be selected automatically
+    <br><br>
+    You may click the serial icon on the toolbar to confirm connectivity.
+    <br><br>p
+  </p>
+
+  <h3>Firmware Repair</h3>
+  <p>
+    Debug or Main Port will be selected automatically
+    <br><br>
+    You may click the serial icon on the toolbar to confirm connectivity.
+    <br><br>
+    This option allows the user to download 
+    new firmware even if the current firmware is corrupted and nothing but BOB-4's 
+    bootloader is operating. To confirm this condition, connect to either the main 
+    or debug serial port at 115.2 kbps using a terminal program. At power up, the 
+    BOB-4 bootloader emits: BOB4 boot loader (s: 4.1.2)
+  <p>
+    In the Serial menu, make sure that 
     the correct PC COM port is selected. The Baud Rate setting doesn't matter 
     in this case because BOB-4's bootloader operates only at 115.2 kbps. Select 
     Serial--&gt;Download--&gt;Firmware (repair). Select the desired BOB-4 firmware 
     file (B4Vxxx.enc) in the Open File dialog when it appears. When the download 
-    is complete, BOB-4 resets itself and launches the new firmware.</FONT></FONT></p>
-</BLOCKQUOTE>
-<p><font size="5" face="Arial, Helvetica, sans-serif"><br>
-  </font><STRONG><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2>Terminal</FONT></FONT></STRONG></p>
-<blockquote> 
-  <p style="margin-right: 0.39in"><FONT FACE="Arial, Helvetica, sans-serif"><FONT SIZE=2><SPAN STYLE="font-weight: medium">Opens 
-    a simple serial communication terminal emulator. Clicking the &quot;Connect&quot; 
-    button opens the currently selected PC COM port at the current baud rate setting. 
-    If the port is successfully opened, then button text changes to &quot;Disconnect.&quot; 
-    Clicking the button again closes the port.<br>
+    is complete, BOB-4 resets itself and launches the new firmware.
+  </p>
+
+<h2>Terminal</h2>
+  <p>
+    Opens a simple serial communication terminal emulator. 
+    using the currently selected PC COM port at the current baud rate setting. 
     <br>
-    Text typed into the Transmit window is transmitted over the serial port to 
-    BOB-4. Messages received from BOB-4 are displayed in the Receive window. Escape 
-    &lt;ESC&gt; is sent by pressing the keyboard &quot;Esc&quot; key. The &quot;Enter&quot; 
-    key sends Carriage Return &lt;CR&gt; <em>and</em> Line Feed &lt;LF&gt; to 
-    BOB-4. </SPAN></FONT></FONT> </p>
-</blockquote>
-<P ALIGN=CENTER><IMG SRC="ImgTerminal.png" NAME="graphics1" ALIGN=BOTTOM WIDTH=414 HEIGHT=384 BORDER=0></P>
-<P ALIGN=CENTER>&nbsp;</P>
-</BODY>
-</HTML>
+    Text typed into the window is line buffered (so corrections are possible) then transmitted
+    when return is pressed, over the serial port, to BOB-4.
+    Messages received from BOB-4 are then displayed.
+  </p>
+</body>
+</html>

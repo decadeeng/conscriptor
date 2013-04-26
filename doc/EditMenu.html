@@ -3,11 +3,11 @@
 <head>
 <title>Edit Menu</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel='stylesheet' type='text/css' href='format.css'>
 </head>
 
 <body>
-<h4 align="center"><font face="Arial, Helvetica, sans-serif">Edit Menu</font></h4>
-<p><font size="5" face="Arial, Helvetica, sans-serif"><strong>
+<p>
   <a href="#_Cut">Cut</a><br>
   <a href="#_Copy">Copy</a><br>
   <a href="#_Paste">Paste</a><br>
@@ -17,86 +17,107 @@
   <a href="#_Move">Move</a><br>
   <a href="#_Pixel_Depth">Pixel Depth</a><br>
   <a href="#_Font_Name">Font Name</a></strong></font></p>
-<p><font size="5" face="Arial, Helvetica, sans-serif"><br>
-  <a name="_Cut"></a><strong>Cut<br>
-  <br>
-  </strong>Copies the selected character for pasting and clears all pixels from 
-  it. Uses buffer memory, not Windows Clipboard. Paste target must be a character 
-  cell of the same dimensions.</font></p>
-<p>&nbsp;</p>
-<p><a name="_Copy"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Copy<br>
-  <br>
-  </strong>Copies the selected character for pasting without clearing it. Uses 
-  buffer memory, not Windows Clipboard. Paste target must be a character cell 
-  of the same dimensions.</font></p>
-<p>&nbsp;</p>
-<p><a name="_Paste"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Paste<br>
-  <br>
-  </strong>Place previously copied character image in the selected character cell. 
-  Pastes from buffer memory, not from Windows Clipboard. Source and target cells 
-  must have the same dimensions.</font></p>
-<p>&nbsp;</p>
-<p><a name="_Clear"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Clear<br>
-  <br>
-  </strong>Clears all pixels in the selected font character.</font></p>
-<p>&nbsp;</p>
-<p><a name="_Insert"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Insert</strong></font></p>
-<blockquote> 
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Row: </strong> 
-    Adds one row to the bottom of the font characters. This command affects all 
-    characters in the fontset.<br>
-    <br>
-    <strong>Column: </strong> Adds one column to the right side of the currently 
-    selected character.<br>
-    <br>
-    <strong>Character: </strong> Adds a new blank character at the current position 
-    in the fontset.<br>
-    <br>
-    <strong>Outline: </strong> Adds a halftone outline to all characters in the 
-    fontset. This command is only available with 2bpp fonts.</font></p>
-  <p>&nbsp;</p>
-</blockquote>
-<p><font face="Arial, Helvetica, sans-serif"><a name="_Delete"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Delete</strong></font></p>
-<blockquote> 
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Row: </strong>Removes 
-    one row from the bottom of the font characters. This command affects all characters 
-    in the fontset.</font></p>
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Column: </strong>Removes 
-    one column from the right side of the currently selected character.</font></p>
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Selected Character: 
-    </strong>Removes the currently selected character.</font></p>
-  <p>&nbsp;</p>
-</blockquote>
-<p><font face="Arial, Helvetica, sans-serif"><a name="_Move"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Move</strong></font></p>
-<blockquote> 
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>Down: </strong>Moves 
-    the currently selected character image one pixel down. A blank row is added 
-    at the top.<br>
-    <br>
-    <strong>Up: </strong>Moves the currently selected character image one pixel 
-    up. A blank row is added at the bottom.<br>
-    <br>
-    <strong>Right: </strong>Moves the currently selected character image one pixel 
-    to the right. A blank column is added at the left.<br>
-    <br>
-    <strong>Left: </strong>Moves the currently selected character image one pixel 
-    to the left. A blank column is added at the right.</font></p>
-  <p>&nbsp;</p>
-</blockquote>
-<p><font face="Arial, Helvetica, sans-serif"><a name="_Pixel_Depth"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Pixel 
-  Depth</strong> (&quot;BPP&quot; or &quot;bpp&quot; is the number of bits per 
-  pixel.)</font></p>
-<blockquote> 
-  <p><font size="5" face="Arial, Helvetica, sans-serif"><strong>1BPP--&gt;2BPP: 
-    </strong>Converts the current font from 1bpp to 2bpp.<br>
-    <br>
-    <strong>2BPP--&gt;1BPP: </strong>Converts the current font from 2bpp to 1bpp. 
-    Halftone pixels are converted to transparent.</font></p>
-  <p>&nbsp;</p>
-</blockquote>
-<p><font face="Arial, Helvetica, sans-serif"><a name="_Font_Name"></a></font><font size="5" face="Arial, Helvetica, sans-serif"><strong>Font 
-  Name<br>
-  <br>
-  </strong>Edit the Font Name field of the current font (not the file name).</font></p>
+<p>
+  <a name="_Cut"><h2>Cut</h2></a>
+  <p>
+    Copies the selected character for pasting and clears all pixels in 
+    it. Uses buffer memory, not Clipboard. Paste target must be a character 
+    font with the same height.
+  </p>
+
+  <a name="_Copy"><h2>Copy</h2></a>
+  <p>
+    Copies the selected character for pasting without clearing it. Uses 
+    buffer memory, not Clipboard. Paste target must be a character font 
+    with the same height.
+  </p>
+
+  <a name="_Paste"><h2>Paste</h2></a>
+  <p>
+    Place previously copied character image in the selected character cell. 
+    Pastes from buffer memory, not from Clipboard. Source and target cells 
+    must have the same height.
+  </p>
+
+  <a name="_Clear"><h2>Clear</h2></a>
+  <p>
+    Clears all pixels in the selected font character.
+  </p>
+
+  <a name="_Insert"><h2>Insert</h2></a>
+    <h3>Row: </h3>
+    <p> 
+      Adds one row to the bottom of the font characters. This command affects all 
+      characters in the fontset.
+    </p>
+    <h3>Column: </h3>
+    <p> 
+      Adds one column to the right side of the currently selected character.
+    </p>
+    <h3>Character: </h3>
+    <p>
+      Adds a new blank character at the current position in the fontset.
+      If you add a character before the end then characters from the insertion point to the
+      end are incremented ie '1' stops looking like '1' instead looks like '2' etc.
+    </p>
+    <h3>Outline: </h3>
+    <p>
+      Adds a halftone outline to all characters in the 
+      fontset. This command is only available with 2bpp fonts.
+    </p>
+
+  <a name="_Delete"><h2>Delete</h2></a>
+    <h3>Row: </h3>
+    <p> 
+      Removes one row from the bottom of the font characters. This command affects all characters 
+      in the fontset.
+    </p>
+    <h3>Column: </h3>
+    <p> 
+      Removes one column from the right side of the currently selected character.
+    </p>
+    <h3>Character: </h3>
+    <p>
+      Removes the currently selected character.
+    </p>
+
+  <a name="_Move"><h2>Move</h2></a>
+    <h3>Down: </h3>
+    <p>
+      Moves the currently selected character image one pixel down. A blank row is added 
+      at the top.
+    </p>
+    <h3>Up: </h3>
+    <p>
+      Moves the currently selected character image one pixel up. A blank row is added at the bottom.
+    </p>
+    <h3>Right: </h3>
+    <p>
+      Moves the currently selected character image one pixel 
+      to the right. A blank column is added at the left.
+    </p>
+    <h3>Left: </h3>
+    <p>
+      Moves the currently selected character image one pixel 
+      to the left. A blank column is added at the right.
+    </p>
+
+  <a name="_Pixel_Depth"><h2>Pixel Depth</h2></a>
+    <p>
+      1BPP or 2BPP is the number of bits per pixel.
+    </p>
+    <h3>1BPP--&gt;2BPP</h3>
+      <p>
+	Converts the current font from 1bpp to 2bpp.
+      </p>
+    <h3>2BPP--&gt;1BPP</h3>
+      <p>
+	Converts the current font from 2bpp to 1bpp. 
+	<br>
+	Halftone pixels are converted to transparent.
+      </p>
+
+  <a name="_Font_Name"><h2>Font Name</h2></a>
+    <p>Edit the Font Name field of the current font (not the file name).</p>
 </body>
 </html>

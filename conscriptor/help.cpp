@@ -22,7 +22,7 @@ void HelpDialog::on_buttonBack_clicked ()
     if (textBrowser->isBackwardAvailable ())
 	textBrowser->backward();
 
-    qDebug () << "Back";
+    //qDebug () << "Back";
 }
 
 /*------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ void HelpDialog::on_buttonBack_clicked ()
 void HelpDialog::on_buttonHome_clicked ()
 {
     textBrowser->home();
-    qDebug () << "Home";
+    //qDebug () << "Home";
 }
 
 /*------------------------------------------------------------------------------------------------
@@ -42,6 +42,6 @@ void HelpDialog::on_buttonForward_clicked ()
     if (textBrowser->isForwardAvailable ())
 	textBrowser->forward();
 
-    qDebug () << "Forward";
+    //qDebug () << "Forward";
 }
 

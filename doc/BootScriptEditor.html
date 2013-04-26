@@ -3,13 +3,14 @@
 <head>
 <title>BootScript Editor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel='stylesheet' type='text/css' href='format.css'>
 </head>
 
 <body>
-<h4 align="center"><font face="Arial, Helvetica, sans-serif">Bootscript Editor</font></h4>
+<h4 align="center">
 <p>&nbsp;</p>
 <p align="center"><img src="ImgBootEd1.png"></p>
-<p><font size="5" face="Arial, Helvetica, sans-serif">BOB-4 can store up to 1024 
+<p>BOB-4 can store up to 1024 
   characters of bootscript text in a reserved segment of flash memory. Bootscripts 
   are always executed immediately after BOB-4 system initialization, before processing 
   any data received through the control ports. Bootscript Editor offers a convenient 
@@ -20,7 +21,7 @@
   code will vary.<br>
   <br>
   To clear an existing BOB-4 bootscript, just execute a Download with the edit 
-  window empty.</font><font size="5" face="Arial, Helvetica, sans-serif"><br>
+  window empty.</font>
   <br>
   When downloading a bootscript to BOB-4, Bootscript Editor automatically brackets 
   it with String Start (&lt;ESC&gt;X) and String End (&lt;ESC&gt;\) codes, and 
@@ -30,12 +31,12 @@
   legal for transmission to BOB-4 through a control port is also acceptable in 
   a bootscript, but there are a couple of important exceptions:</font></p>
 <ol>
-  <li><font size="5" face="Arial, Helvetica, sans-serif">Don't put the reboot 
+  <li>Don't put the reboot 
     command in a bootscript. This is recursive, and a real show-stopper.</font></li>
-  <li><font size="5" face="Arial, Helvetica, sans-serif">Don't put &lt;CSI&gt;1v 
+  <li>Don't put &lt;CSI&gt;1v 
     (Save Configuration) in a bootscript. It will wear out the flash memory.</font></li>
 </ol>
-<p><font size="5" face="Arial, Helvetica, sans-serif">In general, configuration 
+<p>In general, configuration 
   commands don't belong in bootscripts unless they are meant to be temporary. 
   It's usually best to store a new configuration instead of repeatedly issuing 
   an identical salvo of configuration commands. Users might see this issue differently, 
