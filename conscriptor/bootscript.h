@@ -15,6 +15,7 @@ public:
     Conscriptor *conscriptor;
 
 private slots:
+    void screenWidthChanged (int newWidth);
     void on_buttonLoadfile_clicked ();
     void on_buttonSavefile_clicked ();
     void on_buttonDownload_clicked ();
@@ -26,7 +27,9 @@ private slots:
     void exitBSE ();
 private:
     QString curFile;
+    void formatWindow (int newWidth);
     bool modified;
+    bool ignore;
 };
 
 #endif

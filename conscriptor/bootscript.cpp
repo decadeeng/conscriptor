@@ -8,11 +8,49 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
     setupUi(this);
     conscriptor = qobject_cast<Conscriptor*>(parent);
 
-    connect (buttonExit,     SIGNAL(clicked()), this, SLOT(exitBSE ()));
-    connect (plainTextEdit,  SIGNAL(textChanged()), this, SLOT(setModified ()));
+    connect (buttonExit,     SIGNAL (clicked()), this, SLOT(exitBSE ()));
+    connect (plainTextEdit,  SIGNAL (textChanged()), this, SLOT(setModified ()));
+    connect (spinScreenWidth, SIGNAL (valueChanged (int)), this, SLOT (screenWidthChanged (int)));
+
     modified = false;
+    ignore = false;
     buttonDownload->setEnabled (false);
     conscriptor->isBOB ();
+}
+
+/*-------------------------------------------------------------------------------------------------
+ * formatWindow --
+ *-----------------------------------------------------------------------------------------------*/
+void BootscriptDialog::formatWindow (int newWidth)
+{
+    if ((ignore)) {
+	ignore = false;
+	return;
+    }
+
+    QByteArray ba;
+    qDebug ("[formatWindow] %d", newWidth);
+
+    ba.append (plainTextEdit->toPlainText());
+    ba.replace ('\r', "+");
+    ba.replace ('\n', " ");
+
+//    if (spinScreenWidth->value () != 0)
+//	return;
+
+    QString data (ba);
+    ignore = true;
+    plainTextEdit->setPlainText (data);
+    plainTextEdit->moveCursor (QTextCursor::End, QTextCursor::MoveAnchor);
+    plainTextEdit->setFocus (Qt::OtherFocusReason);
+}
+
+/*-------------------------------------------------------------------------------------------------
+ * screenWidthChanged --
+ *-----------------------------------------------------------------------------------------------*/
+void BootscriptDialog::screenWidthChanged (int newWidth)
+{
+    formatWindow (newWidth);
 }
 
 /*-------------------------------------------------------------------------------------------------
@@ -44,19 +82,18 @@ void BootscriptDialog::on_buttonLoadfile_clicked ()
 	ba.replace ("[",  "<CSI>");
 	ba.replace ("Q",  "<ESCQ>");
 	ba.replace ("R",  "<ESCR>");
-	ba.replace ("\n\r", "");
     }
     else {
 	/*-----------------------------------------------------------------------------------------
 	 * Cleanup any editor fiddling on any os b4j's
 	 *---------------------------------------------------------------------------------------*/
-	ba.replace ("\n\r", "");
-	ba.replace ("\r\n", "");
-	ba.replace ('\r', "");
-	ba.replace ('\n', "");
+	ba.replace ('\r', "++");
+	ba.replace ('\n', " ");
     }
     QString data (ba);
+    ignore = false;
     plainTextEdit->setPlainText (data);
+    plainTextEdit->moveCursor (QTextCursor::End, QTextCursor::MoveAnchor);
     plainTextEdit->setFocus (Qt::OtherFocusReason);
     buttonDownload->setEnabled (true);
     modified = false;
@@ -84,6 +121,8 @@ void BootscriptDialog::on_buttonSavefile_clicked ()
 
     QByteArray ba;
     ba.append (plainTextEdit->toPlainText());
+    ba.replace ('\r', "+++");
+    ba.replace ('\n', " ");
     file.write (ba);
     file.close ();
     modified = false;
@@ -100,7 +139,8 @@ void BootscriptDialog::on_buttonDownload_clicked ()
      * resolve the tags
      * sanitize the file of <CR><LF>
      *-------------------------------------------------------------------------------------------*/
-    ba.replace ("\r\n", "");
+    ba.replace ('\r', "");
+    ba.replace ('\n', "");
     ba.replace ("<CSI>",  "[");
     ba.replace ("<ESCQ>", "Q");
     ba.replace ("<ESCR>", "R");
@@ -117,7 +157,7 @@ void BootscriptDialog::on_buttonDownload_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCSI_clicked ()
 {
-    plainTextEdit->insertPlainText ("<CSI>");
+    plainTextEdit->insertPlainText ("\n<CSI>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -126,7 +166,7 @@ void BootscriptDialog::on_buttonCSI_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCRLF_clicked ()
 {
-    plainTextEdit->insertPlainText ("<CRLF>\n");
+    plainTextEdit->insertPlainText ("\n<CRLF>\n");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -135,7 +175,7 @@ void BootscriptDialog::on_buttonCRLF_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonStrString_clicked ()
 {
-    plainTextEdit->insertPlainText ("<ESCQ>");
+    plainTextEdit->insertPlainText ("\n<ESCQ>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -144,7 +184,7 @@ void BootscriptDialog::on_buttonStrString_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonEndString_clicked ()
 {
-    plainTextEdit->insertPlainText ("<ESCR>");
+    plainTextEdit->insertPlainText ("<ESCR>\n");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -155,6 +195,9 @@ void BootscriptDialog::setModified ()
 {
     modified = true;
     buttonDownload->setEnabled (true);
+
+    if (spinScreenWidth->value() > 0)
+	formatWindow (spinScreenWidth->value());
 }
 
 /*-------------------------------------------------------------------------------------------------
