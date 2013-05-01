@@ -12,6 +12,8 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
     connect (plainTextEdit,  SIGNAL (textChanged()), this, SLOT(setModified ()));
     connect (spinScreenWidth, SIGNAL (valueChanged (int)), this, SLOT (screenWidthChanged (int)));
 
+    setLayout (verticalLayout);
+
     modified = false;
     ignore = false;
     buttonDownload->setEnabled (false);
