@@ -7,8 +7,6 @@
 </head>
 
 <body>
-<h4 align="center">
-<p>&nbsp;</p>
 <p align="center"><img src="ImgBootEd1.png"></p>
 <p>BOB-4 can store up to 1024 
   characters of bootscript text in a reserved segment of flash memory. Bootscripts 
@@ -17,24 +15,39 @@
   way to create, edit, save, and download bootscripts to BOB-4 modules.<br>
   <br>
   Bootscript Editor saves bootscript files in plain ASCII format. This allows 
-  editing with many standard text editors, but methods for entering the &lt;ESC&gt; 
-  code will vary.<br>
+  editing with many standard text editors.
+</p>
+<p>
+  The bootscript editor can try to display what you will see on video screen.
   <br>
+  The only way of embedding ESC and NewLines for the conscriptor card is by using &lt;TAGS&gt;.
+  You may enter &lt;TAGS&gt; by hand or by using the convenience buttons.
+  <br>
+  Pretty Display formatting with linefeeds will be ignored by file save and by download functions.
+  <br>
+  Setting or leaving screen width at zero means no reformat is done. Setting screen width to a
+  number will display lines of that width in the edit window. The user would select a width
+  that matchs the conscriptor screen width using the selected font.
+</p>
+<p>
   To clear an existing BOB-4 bootscript, just execute a Download with the edit 
-  window empty.</font>
-  <br>
+  window empty.
+</p>
+<p>
   When downloading a bootscript to BOB-4, Bootscript Editor automatically brackets 
   it with String Start (&lt;ESC&gt;X) and String End (&lt;ESC&gt;\) codes, and 
   then issues the Capture Bootscript (&lt;CSI&gt;8v) and Save Configuration (&lt;CSI&gt;1v) 
   commands. These commands must therefore <strong>not</strong> be included in 
   the user's bootscript. Almost any other sequence of text and commands that is 
   legal for transmission to BOB-4 through a control port is also acceptable in 
-  a bootscript, but there are a couple of important exceptions:</font></p>
+  a bootscript, but there are a couple of important exceptions:
+</p>
 <ol>
-  <li>Don't put the reboot 
-    command in a bootscript. This is recursive, and a real show-stopper.</font></li>
-  <li>Don't put &lt;CSI&gt;1v 
-    (Save Configuration) in a bootscript. It will wear out the flash memory.</font></li>
+  <li>Don't put the reboot command in a bootscript. This is recursive, and a real show-stopper.
+  </li>
+  <li>Don't put &lt;CSI&gt;1v (Save Configuration) in a bootscript.
+      It will wear out the flash memory.
+  </li>
 </ol>
 <p>In general, configuration 
   commands don't belong in bootscripts unless they are meant to be temporary. 
@@ -104,6 +117,7 @@
   <br>
   <strong>Exit</strong><br>
   <br>
-  Quit the Bootscript Editor.</font></p>
+  Quit the Bootscript Editor.
+</p>
 </body>
 </html>
