@@ -25,11 +25,31 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::formatWindow (int newWidth)
 {
+int tidx;			// tag index
+int lastx;			// end <CSI> sequence
+
     if ((ignore)) {
 	ignore = false;
 	return;
     }
 
+    QString data = plainTextEdit->toPlainText();
+    //data.remove ('\r');
+    data.remove ('\n');
+
+    /*---------------------------------------------------------------------------------------------
+     * Always format <tags> 
+     *-------------------------------------------------------------------------------------------*/
+    data.replace ("<CRLF>", "<CRLF>\n");
+    data.replace ("<CR>", "<CR>\n");
+    data.replace ("<LF>", "<LF>\n");
+    data.replace ("<ESCQ>", "\n<ESCQ>");			// This can mess the start
+    data.replace ("<ESCR>", "<ESCR>\n");
+
+    if (data[0] == QChar ('\n'))				// ... so fix it
+	data.remove (0, 1);
+
+#if 0
     QByteArray ba;
     qDebug ("[formatWindow] %d", newWidth);
 
@@ -37,10 +57,13 @@ void BootscriptDialog::formatWindow (int newWidth)
     ba.replace ('\r', "+");
     ba.replace ('\n', " ");
 
-//    if (spinScreenWidth->value () != 0)
+//    if (spinScreenWidth->value () != 0) {
+//	ba.replace ("<CRLF>", "");
+//    }
 //	return;
 
-    QString data (ba);
+#endif 
+
     ignore = true;
     plainTextEdit->setPlainText (data);
     plainTextEdit->moveCursor (QTextCursor::End, QTextCursor::MoveAnchor);
@@ -95,6 +118,7 @@ void BootscriptDialog::on_buttonLoadfile_clicked ()
     QString data (ba);
     ignore = false;
     plainTextEdit->setPlainText (data);
+    formatWindow (spinScreenWidth->value());
     plainTextEdit->moveCursor (QTextCursor::End, QTextCursor::MoveAnchor);
     plainTextEdit->setFocus (Qt::OtherFocusReason);
     buttonDownload->setEnabled (true);
@@ -159,7 +183,11 @@ void BootscriptDialog::on_buttonDownload_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCSI_clicked ()
 {
-    plainTextEdit->insertPlainText ("\n<CSI>");
+    QTextCursor cur = plainTextEdit->textCursor ();
+    if (cur.positionInBlock() == 0)
+	plainTextEdit->insertPlainText ("<CSI>");
+    else
+	plainTextEdit->insertPlainText ("\n<CSI>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -168,7 +196,7 @@ void BootscriptDialog::on_buttonCSI_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCRLF_clicked ()
 {
-    plainTextEdit->insertPlainText ("\n<CRLF>\n");
+    plainTextEdit->insertPlainText ("<CRLF>\n");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
@@ -177,7 +205,11 @@ void BootscriptDialog::on_buttonCRLF_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonStrString_clicked ()
 {
-    plainTextEdit->insertPlainText ("\n<ESCQ>");
+    QTextCursor cur = plainTextEdit->textCursor ();
+    if (cur.positionInBlock() == 0)
+	plainTextEdit->insertPlainText ("<ESCQ>");
+    else
+	plainTextEdit->insertPlainText ("\n<ESCQ>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 

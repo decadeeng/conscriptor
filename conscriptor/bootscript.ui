@@ -47,7 +47,7 @@
         <property name="font">
          <font>
           <family>Monospace</family>
-          <pointsize>10</pointsize>
+          <pointsize>14</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
