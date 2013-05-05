@@ -321,7 +321,7 @@ void BootscriptDialog::on_buttonCRLF_clicked ()
 void BootscriptDialog::on_buttonStrString_clicked ()
 {
     QTextCursor cur = plainTextEdit->textCursor ();
-    if (cur.positionInBlock() == 0)
+    if ((cur.atBlockStart()))
 	plainTextEdit->insertPlainText ("<ESCQ>");
     else
 	plainTextEdit->insertPlainText ("\n<ESCQ>");
