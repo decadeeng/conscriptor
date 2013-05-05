@@ -17,6 +17,10 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
     modified = false;
     ignore = false;
     buttonDownload->setEnabled (false);
+
+    spinScreenWidth->setVisible (false);		// Maybe do this someday
+    label_5->setVisible (false);
+
     conscriptor->isBOB ();
 }
 
@@ -25,44 +29,159 @@ BootscriptDialog::BootscriptDialog(QWidget *parent)
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::formatWindow (int newWidth)
 {
-int tidx;			// tag index
-int lastx;			// end <CSI> sequence
-
     if ((ignore)) {
 	ignore = false;
+	qDebug ("[ignore] - set false - & - return");
 	return;
     }
 
     QString data = plainTextEdit->toPlainText();
-    //data.remove ('\r');
+    /*---------------------------------------------------------------------------------------------
+     * this function runs if width is set
+     * and for character entry if width is not 0
+     *-------------------------------------------------------------------------------------------*/
+    data.remove ('\r');
     data.remove ('\n');
 
     /*---------------------------------------------------------------------------------------------
-     * Always format <tags> 
+     * screenWidth set to something
+     * so format the line length
      *-------------------------------------------------------------------------------------------*/
-    data.replace ("<CRLF>", "<CRLF>\n");
-    data.replace ("<CR>", "<CR>\n");
-    data.replace ("<LF>", "<LF>\n");
-    data.replace ("<ESCQ>", "\n<ESCQ>");			// This can mess the start
-    data.replace ("<ESCR>", "<ESCR>\n");
+    if (spinScreenWidth->value () > 0) {
+	int thisEnd = 0;
+	int thisStart;
+	int curIndex;
+	int crlfIndex = -1;
+	int crIndex = -1;
+	int lfIndex = -1;
+	int escqIndex = -1; 
+	int escrIndex = -1;
+	int csiIndex = -1;
+	int csiEnd = -1;
 
-    if (data[0] == QChar ('\n'))				// ... so fix it
-	data.remove (0, 1);
+	/*-----------------------------------------------------------------------------------------
+	 * foreach line  thisStart..............thisEnd
+	 *---------------------------------------------------------------------------------------*/
+	for ( ;thisEnd < data.size ();) {
 
-#if 0
-    QByteArray ba;
-    qDebug ("[formatWindow] %d", newWidth);
+	    thisStart = thisEnd;
+	    thisEnd += spinScreenWidth->value ();
+	    thisEnd = qMin (thisEnd, data.size ());
+	    qDebug ("----------editLoop\n[Size %d] thisStart:%d thisEnd:%d screenWidth:%d",
+			    data.size (), thisStart, thisEnd, spinScreenWidth->value ());
 
-    ba.append (plainTextEdit->toPlainText());
-    ba.replace ('\r', "+");
-    ba.replace ('\n', " ");
+	    //------------------- Show the window data
+	    for (QChar *it=data.begin(); it!=data.end(); ++it) {
+		char ch = it->toAscii();
+		if ((ch >= ' ') && (ch <= 'z'))
+		    printf ("%c ", ch);
+		else if (ch == '\n')
+		    printf ("0a\n");
+		else
+		    printf ("%02x ", ch);
+	    }
+	    printf ("\n");
 
-//    if (spinScreenWidth->value () != 0) {
-//	ba.replace ("<CRLF>", "");
-//    }
-//	return;
+	    /*-------------------------------------------------------------------------------------
+	     * Workout thisLine length
+	     *-----------------------------------------------------------------------------------*/
+	    curIndex = data.indexOf  ("<",  thisStart);			// find 1st tag
+	    if ((curIndex != -1) && (curIndex < thisEnd)) {		//   which is in this line
 
-#endif 
+		/*---------------------------------------------------------------------------------
+		 * Find index's if they exist
+		 *-------------------------------------------------------------------------------*/
+		if (crlfIndex < thisStart)
+		    crlfIndex = data.indexOf ("<CRLF", thisStart);
+		if (crIndex < thisStart)
+		    crIndex = data.indexOf   ("<CR>",  thisStart);
+		if (lfIndex < thisStart)
+		    lfIndex = data.indexOf   ("<LF",   thisStart);
+		if (escqIndex < thisStart)
+		    escqIndex = data.indexOf ("<ESCQ", thisStart);
+		if (escrIndex < thisStart)
+		    escrIndex = data.indexOf ("<ESCR", thisStart);
+		if (csiIndex < thisStart)
+		    csiIndex = data.indexOf  ("<CSI",  thisStart);
+		if (csiIndex != -1)
+		    csiEnd = data.indexOf (QRegExp ("[A-DHJ-MUXfmnqstuvwxz}{|]"),  csiIndex + 5);
+
+		//------------------ Show the Index's
+		qDebug ("[cur]    %d", crlfIndex);
+		qDebug ("[crlf]   %d", crlfIndex);
+		qDebug ("[cr]     %d", crIndex);
+		qDebug ("[lf]     %d", lfIndex);
+		qDebug ("[escq]   %d", escqIndex);
+		qDebug ("[escr]   %d", escrIndex);
+		qDebug ("[csi]    %d", csiIndex);
+		qDebug ("[csiEnd] %d", csiEnd);
+
+		if (curIndex == escqIndex) {			// if it is STRstart
+		    if (curIndex != thisStart) {		// NOT at start of line
+			thisEnd = escqIndex + 1;		// upto STRstart is the line
+			data.insert (escqIndex, '\n');		// STRstart is a new line
+		    }
+		    else {					// IS at start of line
+			if (escrIndex == -1) {			// no STRend
+			    thisEnd = data.size ();		//  EVERYTHING is the string
+			    //done = true;
+			}
+			else {
+			    thisEnd = escrIndex + 1;		// is STRend
+			    data.insert (escrIndex, '\n');	//  EVERYTHING to here
+			}
+		    }
+		}
+			
+		else if (curIndex == escrIndex) {		// if it is STRend
+		    thisEnd = curIndex + 7;
+		    data.insert (curIndex + 6, '\n');
+		}
+
+		else if (curIndex == crlfIndex) {		// if it is CRLF
+		    thisEnd = curIndex + 7;
+		    data.insert (curIndex + 6, '\n');
+		}
+
+		else if (curIndex == lfIndex) {			// if it is LF
+		    thisEnd = curIndex + 5;
+		    data.insert (curIndex + 4, '\n');
+		}
+
+		else if (curIndex == crIndex) {			// if it is CR
+		    thisEnd = curIndex + 5;
+		    data.insert (curIndex + 4, '\n');
+		}
+
+		else if (curIndex == csiIndex) {		// if it is CSI
+		    if (csiEnd == -1)				//    bare CSI
+			thisEnd += 5;
+		    else
+			thisEnd += (csiEnd - csiIndex);		//    to CSIend
+		}
+		continue;
+	    }
+	    data.insert (thisEnd++, '\n');
+if (thisEnd > 100)
+break;
+	} 	// EditLoop
+    }		// if (screenWidth 1..n
+
+    else {	// if (screenWidth 0
+	/*-----------------------------------------------------------------------------------------
+	 * screenWidth set to 0
+	 * this code runs only when some width is reset to 0, not when a char is entered
+	 * so restore the basic formatting
+	 *---------------------------------------------------------------------------------------*/
+	data.replace ("<CRLF>", "<CRLF>\n");
+	data.replace ("<CR>", "<CR>\n");
+	data.replace ("<LF>", "<LF>\n");
+	data.replace ("<ESCQ>", "\n<ESCQ>");			// This can mess the start
+	data.replace ("<ESCR>", "<ESCR>\n");
+
+	if (data[0] == QChar ('\n'))				// ... so fix it
+	    data.remove (0, 1);
+    }
 
     ignore = true;
     plainTextEdit->setPlainText (data);
@@ -183,11 +302,7 @@ void BootscriptDialog::on_buttonDownload_clicked ()
  *-----------------------------------------------------------------------------------------------*/
 void BootscriptDialog::on_buttonCSI_clicked ()
 {
-    QTextCursor cur = plainTextEdit->textCursor ();
-    if (cur.positionInBlock() == 0)
-	plainTextEdit->insertPlainText ("<CSI>");
-    else
-	plainTextEdit->insertPlainText ("\n<CSI>");
+    plainTextEdit->insertPlainText ("<CSI>");
     plainTextEdit->setFocus (Qt::OtherFocusReason);
 }
 
