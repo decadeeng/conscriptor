@@ -104,7 +104,7 @@ int fdx;
 void SetupDialog::on_buttonLoadB4B_clicked ()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Load BOB-4 bootscipt files", "",
-									    "bootscript (*.b4b)");
+									"bootscript (*.b4j)");
     if (fileName.isEmpty() == false)
 	bootEdit->setText (fileName);
 }
